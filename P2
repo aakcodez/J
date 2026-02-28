@@ -1,0 +1,92 @@
+
+import java.util.Scanner;
+
+class BankAccount {
+
+    int accNo;
+    String accHolder;
+    double balance;
+
+    // 🔹 Constructor Overloading
+
+    // Default constructor
+    BankAccount() {
+        accNo = 0;
+        accHolder = "Not Assigned";
+        balance = 0.0;
+    }
+
+    // Constructor with account number and holder name
+    BankAccount(int accNo, String accHolder) {
+        this.accNo = accNo;
+        this.accHolder = accHolder;
+        balance = 0.0;
+    }
+
+    // Constructor with all details
+    BankAccount(int accNo, String accHolder, double balance) {
+        this.accNo = accNo;
+        this.accHolder = accHolder;
+        this.balance = balance;
+    }
+
+    // 🔹 Method Overloading
+
+    // Deposit method (no argument)
+    void deposit() {
+        System.out.println("No amount specified");
+    }
+
+    // Deposit method with amount
+    void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: " + amount);
+    }
+
+    // Withdraw method with amount
+    void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn: " + amount);
+        } else {
+            System.out.println("Insufficient balance");
+        }
+    }
+
+    // Withdraw method with amount and minimum balance
+    void withdraw(double amount, double minBalance) {
+        if (balance - amount >= minBalance) {
+            balance -= amount;
+            System.out.println("Withdrawn: " + amount);
+        } else {
+            System.out.println("Minimum balance limit reached");
+        }
+    }
+
+    // Display account details
+    void display() {
+        System.out.println("\nAccount Number : " + accNo);
+        System.out.println("Account Holder : " + accHolder);
+        System.out.println("Balance        : " + balance);
+    }
+}
+
+public class BankingApp {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Account creation using constructor overloading
+        BankAccount acc1 = new BankAccount(101, "Anvita", 5000);
+
+        acc1.display();
+
+        acc1.deposit(2000);          // Method overloading
+        acc1.withdraw(1000);
+        acc1.withdraw(3000, 2000);   // Overloaded withdraw method
+
+        acc1.display();
+
+        sc.close();
+    }
+}
