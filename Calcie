@@ -1,0 +1,80 @@
+
+import java.util.Scanner;
+
+public class Calculator {
+    float n1;
+    float n2;
+    static float result;
+
+    Calculator(float n1, float n2) {
+        this.n1 = n1;
+        this.n2 = n2;
+    }
+
+    void add() {
+        result = n1 + n2;
+        System.out.println("Result = " + result);
+    }
+
+    void subtract() {
+        result = n1 - n2;
+        System.out.println("Result = " + result);
+    }
+
+    void multiply() {
+        result = n1 * n2;
+        System.out.println("Result = " + result);
+    }
+
+    void divide() {
+        if (n2 == 0) {
+            System.out.println("Cannot divide by zero");
+            return;
+        }
+        result = n1 / n2;
+        System.out.println("Result = " + result);
+    }
+
+    static void resetresult() {
+        result = 0;
+        System.out.println("Result reset to 0");
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the first number");
+        float n1 = sc.nextFloat();
+
+        System.out.println("Enter the second number");
+        float n2 = sc.nextFloat();
+
+        Calculator c = new Calculator(n1, n2);
+
+        while (true) {
+            System.out.println("\n1. Addition");
+            System.out.println("2. Subtraction");
+            System.out.println("3. Multiplication");
+            System.out.println("4. Division");
+            System.out.println("5. Reset Result");
+            System.out.println("6. Exit");
+
+            int ch = sc.nextInt();
+
+            switch (ch) {
+                case 1 -> c.add();
+                case 2 -> c.subtract();
+                case 3 -> c.multiply();
+                case 4 -> c.divide();
+                case 5 -> resetresult();
+                case 6 -> {
+                    sc.close();
+                    System.exit(0);
+                }
+                default -> System.out.println("Invalid Choice");
+            }
+
+            System.out.println("Result : " + result);
+        }
+    }
+}
