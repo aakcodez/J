@@ -1,4 +1,4 @@
-Storage Class
+//Storage Class
 
 package prgm9;
 
@@ -19,7 +19,7 @@ class Storage <T>{
 }
 
 
-Generic Demo Class
+//Generic Demo Class
 
 package prgm9;
 
@@ -61,7 +61,7 @@ class GenericDemo {
 
 
 
-Modified main() Code
+//Modified main() Code
 
 public static void main (String [] args) {
 
