@@ -1,0 +1,85 @@
+Storage Class
+
+package prgm9;
+
+class Storage <T>{
+	private T item;
+	
+	public Storage (T item){
+		this.item=item;
+	}
+	
+	public void setItem(T item) {
+		this.item=item;
+	}
+	
+	public T getitem() {
+		return item;
+	}
+}
+
+
+Generic Demo Class
+
+package prgm9;
+
+class GenericDemo {
+
+    public static <E> void printArray(E[] array) {
+
+        for (E element : array) {
+            System.out.print(element + " ");
+        }
+
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+
+        Storage<Integer> intStorage = new Storage<>(10);
+        Storage<String> stringStorage = new Storage<>("Java Generics");
+        Storage<Double> doubleStorage = new Storage<>(25.45);
+
+        System.out.println("Stored Integer: " + intStorage.getitem());
+        System.out.println("Stored String: " + stringStorage.getitem());
+        System.out.println("Stored Double: " + doubleStorage.getitem());
+
+        Integer[] intArray = {1,2,3,4};
+        String[] strArray = {"Java","C++","Python"};
+        Character[] charArray = {'A','B','C','D'};
+
+        System.out.println("String Array");
+        printArray(strArray);
+
+        System.out.println("Integer Array");
+        printArray(intArray);
+
+        System.out.println("Character Array");
+        printArray(charArray);
+    }
+}
+
+
+
+Modified main() Code
+
+public static void main (String [] args) {
+
+    Integer [] intArray = {1,2,3,4};
+    String [] strArray = {"Java", "C++", "Python"};
+    Double [] doubleArray = {10.5, 20.5, 30.5};
+
+    Storage<Integer[]> intStorage = new Storage<>(intArray);
+    Storage<String[]> stringStorage = new Storage<>(strArray);
+    Storage<Double[]> doubleStorage = new Storage<>(doubleArray);
+
+    System.out.println("Stored Integer Array:");
+    printArray(intStorage.getitem());
+
+    System.out.println("Stored String Array:");
+    printArray(stringStorage.getitem());
+
+    System.out.println("Stored Double Array:");
+    printArray(doubleStorage.getitem());
+}
+
