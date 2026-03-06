@@ -1,0 +1,56 @@
+//Square.java
+package prgm3;
+
+public class Square {
+	public void area(double side) {
+		double area = side*side;
+	System.out.println("Area of the Square:" +area);
+	}
+}
+
+
+//Triangle
+package prgm3;
+
+public class Triangle {
+	public void area(double base, double height) {
+		double area = 0.5 * base * height;
+		System.out.println("Area of the triangle:" + area);
+	}
+
+}
+
+//Circle
+package prgm3;
+
+public class Circle {
+	public void area (double radius) {
+		double area = 3.14 * radius * radius;
+		System.out.println("Area of the Circle :" + area);
+	}
+
+}
+
+//Main
+package prgm3;
+
+import prgm3.Square;
+import prgm3.Circle;
+import prgm3.Triangle;
+
+public class Main {
+	public static void main(String [] args) {
+		
+		Square s = new Square();
+		Circle c = new Circle();
+		Triangle t = new Triangle();
+		
+		s.area(2);
+		c.area(5);
+		t.area(2,4);
+		
+		
+	}
+
+}
+
