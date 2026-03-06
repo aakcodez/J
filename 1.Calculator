@@ -1,0 +1,64 @@
+package prgm1;
+import java.util.Scanner;
+
+public class Calculator {
+
+    // Instance variables
+    float num1, num2;
+
+    // Static variable
+    static float result;
+
+    // Parameterized constructor
+    Calculator(float num1, float num2) {
+        this.num1 = num1;   // using this keyword
+        this.num2 = num2;
+    }
+
+    // Method to perform arithmetic operations
+    void calculateSum() {
+
+        // Local variables
+        float sum = num1 + num2;
+        float difference = num1 - num2;
+        float product = num1 * num2;
+
+        System.out.println("\n--- Arithmetic Operations ---");
+
+        System.out.println("Sum: " + sum);
+        System.out.println("Difference: " + difference);
+        System.out.println("Product: " + product);
+
+        // Block variable inside if block
+        if (num2 != 0) {
+            float division = num1 / num2;   // block variable
+            System.out.println("Division: " + division);
+        } else {
+            System.out.println("Division not possible (Cannot divide by zero)");
+        }
+
+        // Assigning static variable
+        result = sum;
+
+        System.out.println("\nStatic Variable result: " + result);
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter first number:");
+        int a = sc.nextInt();
+
+        System.out.println("Enter second number:");
+        int b = sc.nextInt();
+
+        // Creating object
+        Calculator calc = new Calculator(a, b);
+
+        // Calling method
+        calc.calculateSum();
+
+        sc.close();
+    }
+}
