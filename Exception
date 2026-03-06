@@ -1,0 +1,78 @@
+package prgm6;
+
+//InvalidAgeException Class
+
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+//InvalidDivisorException Class
+
+class InvalidDivisorException extends Exception{
+	public InvalidDivisorException(String message) {
+		super(message);
+	}
+}
+
+
+//AgeService Class
+
+package prgm6;
+
+public class AgeService {
+
+    public static void validateAge(int age) throws InvalidAgeException {
+        if (age < 18) {
+            throw new InvalidAgeException("Age must be 18 or above to access the service");
+        }
+    }
+
+    public static int performDivision(int age, int divisor) {
+        if (divisor == 0) {
+            throw new ArithmeticException("Cannot divide by zero");
+        }
+        return age / divisor;
+    }
+}
+
+
+//Main Class
+
+package prgm6;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            System.out.println("Enter your age:");
+            int age = sc.nextInt();
+
+            System.out.println("Enter divisor value:");
+            int divisor = sc.nextInt();
+
+            AgeService.validateAge(age);
+
+            int result = AgeService.performDivision(age, divisor);
+
+            System.out.println("Access Granted.");
+            System.out.println("Result of division: " + result);
+
+        } catch (InvalidAgeException e) {
+            System.out.println("Custom Age Exception: " + e.getMessage());
+
+        } catch (ArithmeticException e) {
+            System.out.println("Arithmetic Exception: " + e.getMessage());
+
+        } finally {
+            System.out.println("Program execution completed.");
+            sc.close();
+        }
+    }
+}
