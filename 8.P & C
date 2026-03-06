@@ -1,0 +1,58 @@
+package prgm8;
+
+//Producer Thread
+class Producer extends Thread {
+ Buffer buffer;
+
+ // Constructor
+ Producer(Buffer b) {
+     buffer = b;
+ }
+
+ public void run() {
+     for (int i = 0; i < 5; i++) {
+         buffer.put(i);
+     }
+ }
+}
+
+
+package prgm8;
+
+//Consumer Thread
+class Consumer extends Thread {
+ Buffer buffer;
+
+ // Constructor
+ Consumer(Buffer b) {
+ 
+     buffer = b;
+ }
+
+ public void run() {
+     for (int i = 0; i < 5; i++) {
+         int value = buffer.get();   // using get()
+         System.out.println("Consumer got: " + value);
+     }
+ }
+}
+
+
+
+package prgm8;
+
+//Main Class
+public class ProducerConsumerDemo {
+ public static void main(String args[]) {
+
+     // Constructor usage
+     Buffer b = new Buffer();
+     Producer p = new Producer(b);
+     Consumer c = new Consumer(b);
+
+     p.start();
+     c.start();
+ }
+}
+
+
