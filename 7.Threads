@@ -1,0 +1,76 @@
+//Thread1 class 
+
+package prgm7;
+
+class Thread1 extends Thread{
+	static final Object lock = new Object(); //Common lock
+	public void run() {
+		synchronized (lock) {
+				try {
+			for (int i =1; i<=5; i++) {
+				System.out.println("Thread1: " + i);
+				Thread.sleep(2000);
+			}
+		}catch (InterruptedException e) {
+			System.out.println("Thread1 Interrupted");
+		}
+		System.out.println("Thread1 Finished.");
+	}
+
+	}
+}
+
+
+//Thread2 Class
+
+package prgm7;
+
+class Thread2 extends Thread{
+	public void run() {
+		synchronized (Thread1.lock) { //same lock object
+		try {
+			for (int i =10; i<=15; i++) {
+				System.out.println("Thread2: " + i);
+				Thread.sleep(2000);
+			}
+		}catch (InterruptedException e) {
+			System.out.println("Thread2 Interrupted");
+		}
+		System.out.println("Thread2 Finished.");
+	}
+
+}
+}
+
+
+//Main Class
+
+package prgm7;
+
+public class Main {
+	public static void main(String [] args) throws InterruptedException{
+		
+		Thread1 t1 = new Thread1();
+		Thread2 t2 = new Thread2();
+		
+		System.out.println("t1 State after creation:" + t1.getState());
+		System.out.println("t2 State after creation:" + t1.getState());
+		
+		t1.start();
+		t2.start();
+		
+		System.out.println("t1 State after start():" + t1.getState());
+		System.out.println("t2 State after start(): " + t2.getState());
+		
+		Thread.sleep(1000);
+		
+		System.out.println("t1 State during sleep:" + t1.getState());
+		System.out.println("t2 State during sleep:" + t2.getState());
+		
+		t1.join();
+		t2.join();
+		System.out.println("t1 Final State: " + t1.getState());
+		System.out.println("t2 final state:" + t2.getState());
+	}
+
+}
