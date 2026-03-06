@@ -1,0 +1,119 @@
+//personal.java
+package prgm5;
+
+interface Personal {
+	void getPersonalDetails(String name, int age);
+		void displayPersonalDetails();
+	}
+
+//Ofical.java
+package prgm5;
+
+interface Official {
+	void getOfficialDetails(String Designation, String Department);
+	void displayOfficialDetails();
+
+}
+
+
+//Employee.java
+
+/*package prgm5;
+
+class Employee implements Personal, Official {
+	String name;
+	int age;
+	
+	String Designation;
+	String Department;
+	
+	public void getPersonalDetails(String name, int age) {
+		this.name = name;
+		this.age = age;
+
+}
+	public void displayPersonalDetails() {
+		System.out.println("\n ---Personal Details---");
+		System.out.println("Name: " + name);
+		System.out.println("Age: " + age);
+	}
+	
+	public void getOfficialDetails(String Designation, String Department) {
+		this.Designation= Designation;
+		this.Department=Department;
+	}
+
+	public void displayOfficialDetails() {
+		System.out.println("\n---Official Details---");
+		System.out.println("Designation:" + Designation);
+		System.out.print("Department:" + Department);
+	}
+}*/
+
+package prgm5;
+
+public class Employee {
+    String name;
+    int age;
+    String designation;
+    String department;
+
+    void setPersonalDetails(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    void setOfficialDetails(String designation, String department) {
+        this.designation = designation;
+        this.department = department;
+    }
+
+    void displayPersonalDetails() {
+        System.out.println("\n---Personal Details---");
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
+
+    void displayOfficialDetails() {
+        System.out.println("\n---Official Details---");
+        System.out.println("Designation: " + designation);
+        System.out.println("Department: " + department);
+    }
+}
+
+
+//Main.java
+package prgm5;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Employee emp = new Employee();
+
+        System.out.println("Enter your name:");
+        String name = sc.nextLine();
+
+        System.out.println("Enter your age:");
+        int age = sc.nextInt();
+        sc.nextLine();  // clear buffer
+
+        System.out.println("Enter your Designation:");
+        String desig = sc.nextLine();
+
+        System.out.println("Enter your Department:");
+        String dept = sc.nextLine();
+
+        emp.setPersonalDetails(name, age);
+        emp.setOfficialDetails(desig, dept);
+
+        emp.displayPersonalDetails();
+        emp.displayOfficialDetails();
+
+        sc.close();
+    }
+}
+
+
+
