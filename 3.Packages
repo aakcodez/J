@@ -52,5 +52,47 @@ public class Main {
 		
 	}
 
+
+
+//If asked for the user input
+
+package prgm3;
+
+import java.util.Scanner; // Import the Scanner class
+import prgm3.Square;
+import prgm3.Circle;
+import prgm3.Triangle;
+
+public class Main {
+    public static void main(String[] args) {
+        // Create a Scanner object to read input
+        Scanner input = new Scanner(System.in);
+        
+        Square s = new Square();
+        Circle c = new Circle();
+        Triangle t = new Triangle();
+        
+        // --- Square Input ---
+        System.out.print("Enter the side of the square: ");
+        double side = input.nextDouble();
+        s.area(side);
+        
+        // --- Circle Input ---
+        System.out.print("Enter the radius of the circle: ");
+        double radius = input.nextDouble();
+        c.area(radius);
+        
+        // --- Triangle Input ---
+        System.out.print("Enter the base of the triangle: ");
+        double base = input.nextDouble();
+        System.out.print("Enter the height of the triangle: ");
+        double height = input.nextDouble();
+        t.area(base, height);
+        
+        // Close the scanner to be neat
+        input.close();
+    }
+}
+
 }
 
