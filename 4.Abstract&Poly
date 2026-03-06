@@ -1,0 +1,137 @@
+Abstraction
+
+//Vechile Class
+
+package prgm4Interface;
+
+abstract class Vehicle {
+	abstract void drive();
+	
+
+}
+
+
+//Car.java
+
+package prgm4Interface;
+
+class Car extends Vehicle{
+	void drive() {
+		System.out.println("Car is driving on four wheels.");
+	}
+	
+	
+
+}
+
+
+// Motorcycle.java
+
+package prgm4Interface;
+
+class Motorcycle extends Vehicle{
+	void drive() {
+		System.out.println("Motorcycle is driving on the two wheels.");
+	}
+
+}
+
+//Main.java
+
+package prgm4Interface;
+
+public class Main {
+	public static void main(String [] args) {
+		
+		Vehicle v;
+		
+		v =new Car();
+		
+		v.drive();
+		
+		v = new Motorcycle();
+		
+		v.drive();
+		}
+	}
+
+
+
+PolymorphismDemo
+
+//Printer.java
+
+package prgm4;
+
+abstract class Printer {
+	
+	abstract void configuration();
+	abstract void display();
+
+}
+
+//DotMatrix
+
+package prgm4;
+
+class DotMatrix extends Printer {
+	void configuration() {
+		System.out.println("DotMatrix Printer Configuration: 9-pin, Slow speed");
+		
+	}
+	
+	void display() {
+		System.out.println("DotMatrix Printer is printing bills ....");
+	}
+
+}
+
+
+//LaserJet
+
+package prgm4;
+
+class LaserJet extends Printer{
+	void configuration () {
+		System.out.println("LaserJet Printer Configuration: High resolution, Fast Speed");
+	}
+	
+	void display() {
+		System.out.println("LaserJet Printer is printing documents");
+	}
+
+}
+
+
+//Main
+
+package prgm4;
+import java.util.Scanner;
+public class Main {
+	public static void main(String [] args) {
+		Scanner sc = new Scanner(System.in);
+		Printer printer;
+		
+		System.out.println("1.DotMatrix Printer");
+		System.out.println("2.LaserJet Printer");
+		System.out.println("Enter your choice");
+		int choice = sc.nextInt();
+		
+		if (choice == 1) {
+			printer = new DotMatrix();
+			
+		}else {
+			printer = new LaserJet();
+		}
+		
+		printer.configuration();
+		printer.display();
+		
+		sc.close();
+		
+	}
+}
+
+
+
+
