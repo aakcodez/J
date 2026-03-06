@@ -1,4 +1,4 @@
-//personal.java
+//personal-interface
 package prgm5;
 
 interface Personal {
@@ -6,7 +6,7 @@ interface Personal {
 		void displayPersonalDetails();
 	}
 
-//Ofical.java
+//Ofical-interface
 package prgm5;
 
 interface Official {
