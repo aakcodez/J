@@ -1,0 +1,112 @@
+package prgm2;
+
+import java.util.Scanner;
+
+class BankAcc {
+
+    String name;
+    double balance;
+    String accountType;
+
+    static int totalAccounts = 0;
+
+    BankAcc(String name) {
+        this.name = name;
+        this.accountType = "Savings";
+        this.balance = 0.0;
+        totalAccounts++;
+    }
+
+    BankAcc(String name, double balance) {
+        this.name = name;
+        this.balance = balance;
+        this.accountType = "Savings";
+        totalAccounts++;
+    }
+
+    BankAcc(String name, double balance, String accountType) {
+        this.name = name;
+        this.balance = balance;
+        this.accountType = accountType;
+        totalAccounts++;
+    }
+
+    // Deposit methods
+    void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited Amount: " + amount);
+    }
+
+    void deposit(double amount, String transactionType) {
+        balance += amount;
+        System.out.println("Deposited Amount: " + amount + " via " + transactionType);
+    }
+
+    // Withdraw methods
+    void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn Amount: " + amount);
+        } else {
+            System.out.println("Insufficient Balance");
+        }
+    }
+
+    void withdraw(double amount, double minBalance) {
+        if (balance - amount >= minBalance) {
+            balance -= amount;
+            System.out.println("Withdrawn Amount: " + amount);
+        } else {
+            System.out.println("Minimum balance limit reached");
+        }
+    }
+
+    void displayAccount() {
+        System.out.println("\n----- Account Details -----");
+        System.out.println("Account Holder : " + name);
+        System.out.println("Account Type   : " + accountType);
+        System.out.println("Balance        : " + balance);
+    }
+
+    static void displayTotalAccounts() {
+        System.out.println("\nTotal Accounts Created : " + totalAccounts);
+    }
+}
+
+public class BankAccount {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        BankAcc acc1 = new BankAcc("Anand");
+        BankAcc acc2 = new BankAcc("Anvita", 5000);
+        BankAcc acc3 = new BankAcc("Sneha", 10000, "Current");
+
+        // Deposit input
+        System.out.print("Enter deposit amount for Anand: ");
+        double dep1 = sc.nextDouble();
+        acc1.deposit(dep1);
+
+        System.out.print("Enter deposit amount for Anvita: ");
+        double dep2 = sc.nextDouble();
+        acc2.deposit(dep2, "Cash");
+
+        // Withdraw input
+        System.out.print("Enter withdraw amount for Sneha: ");
+        double w1 = sc.nextDouble();
+        acc3.withdraw(w1);
+
+        System.out.print("Enter withdraw amount with minimum balance (2000): ");
+        double w2 = sc.nextDouble();
+        acc3.withdraw(w2, 2000);
+
+        acc1.displayAccount();
+        acc2.displayAccount();
+        acc3.displayAccount();
+
+        BankAcc.displayTotalAccounts();
+
+        sc.close();
+    }
+}
