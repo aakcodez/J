@@ -1,0 +1,339 @@
+Got it 👍
+You want the same program written neatly in this order:
+
+1️⃣ Flow of the Program
+2️⃣ Code Files
+3️⃣ Expected Output
+
+This program is a REST API using Jersey (JAX-RS) to perform CRUD operations on Student data.
+
+
+---
+
+1. Flow of the Program
+
+Step 1 – Create Dynamic Web Project
+
+1. Open Eclipse IDE
+
+
+2. Go to File → New → Dynamic Web Project
+
+
+3. Give project name → RestAPI
+
+
+4. Select Tomcat Server
+
+
+5. Click Finish
+
+
+
+
+---
+
+Step 2 – Add Required Libraries
+
+Add the required Jersey JAX-RS libraries to the project.
+
+
+---
+
+Step 3 – Create Package
+
+Inside src/main/java
+
+Create package:
+
+com.student.api
+
+
+---
+
+Step 4 – Create Java Class
+
+Create class:
+
+StudentResource.java
+
+This class will implement REST operations:
+
+GET → List students
+
+POST → Add student
+
+PUT → Update student
+
+DELETE → Remove student
+
+
+
+---
+
+Step 5 – Configure web.xml
+
+Inside WEB-INF folder create:
+
+web.xml
+
+Configure Jersey servlet.
+
+
+---
+
+Step 6 – Run the Project
+
+1. Right click project
+
+
+2. Run on Server
+
+
+3. Server: Tomcat
+
+
+
+
+---
+
+Step 7 – Test APIs
+
+Use browser or Postman to send requests:
+
+GET
+
+POST
+
+PUT
+
+DELETE
+
+
+
+---
+
+2. Code Files
+
+
+---
+
+File 1: StudentResource.java
+
+package com.student.api;
+
+import java.util.HashMap;
+import java.util.Map;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
+@Path("/students")
+public class StudentResource {
+
+    private static Map<String, String> studentDB = new HashMap<>();
+
+    static {
+        studentDB.put("101", "John Doe");
+        studentDB.put("102", "Jane Smith");
+    }
+
+    // Helper method to return HTML
+    private String html(String message) {
+        return "<html><body><h3>" + message + "</h3></body></html>";
+    }
+
+    // GET - List Students
+    @GET
+    @Path("/list")
+    @Produces(MediaType.TEXT_HTML)
+    public String getAllStudents() {
+
+        if(studentDB.isEmpty())
+            return html("No students found");
+
+        String list = studentDB.entrySet()
+                .stream()
+                .map(e -> "ID: " + e.getKey() + " Name: " + e.getValue())
+                .reduce((a,b) -> a + "<br>" + b)
+                .orElse("");
+
+        return html(list);
+    }
+
+    // POST - Add Student
+    @POST
+    @Path("/create")
+    @Produces(MediaType.TEXT_HTML)
+    public String addStudent(@QueryParam("id") String id,
+                             @QueryParam("name") String name) {
+
+        if(id == null || name == null)
+            return html("Error: Provide ID and Name");
+
+        studentDB.put(id, name);
+
+        return html("Student Added : " + name + " (ID : " + id + ")");
+    }
+
+    // PUT - Update Student
+    @PUT
+    @Path("/update")
+    @Produces(MediaType.TEXT_HTML)
+    public String updateStudent(@QueryParam("id") String id,
+                                @QueryParam("name") String name) {
+
+        if(!studentDB.containsKey(id))
+            return html("Error: Student ID not found");
+
+        studentDB.put(id, name);
+
+        return html("Student " + id + " Updated to : " + name);
+    }
+
+    // DELETE - Delete Student
+    @DELETE
+    @Path("/delete/{id}")
+    @Produces(MediaType.TEXT_HTML)
+    public String deleteStudent(@PathParam("id") String id) {
+
+        if(!studentDB.containsKey(id))
+            return html("Error: Student ID not found");
+
+        String name = studentDB.remove(id);
+
+        return html("Student Removed : " + name + " (ID : " + id + ")");
+    }
+}
+
+
+---
+
+File 2: web.xml
+
+Location:
+
+WebContent → WEB-INF → web.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         version="3.0">
+
+<servlet>
+    <servlet-name>Jersey</servlet-name>
+
+    <servlet-class>
+        com.sun.jersey.spi.container.servlet.ServletContainer
+    </servlet-class>
+
+    <init-param>
+        <param-name>
+        com.sun.jersey.config.property.packages
+        </param-name>
+
+        <param-value>
+        com.student.api
+        </param-value>
+
+    </init-param>
+
+    <load-on-startup>1</load-on-startup>
+
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>Jersey</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
+</servlet-mapping>
+
+</web-app>
+
+
+---
+
+3. Expected Output
+
+
+---
+
+1️⃣ GET Request
+
+URL:
+
+http://localhost:8080/RestAPI/rest/students/list
+
+Output:
+
+ID : 101   Name : John Doe
+ID : 102   Name : Jane Smith
+
+
+---
+
+2️⃣ POST Request (Add Student)
+
+URL:
+
+http://localhost:8080/RestAPI/rest/students/create?id=103&name=Alex
+
+Output:
+
+Student Added : Alex (ID : 103)
+
+
+---
+
+3️⃣ GET Again
+
+ID : 101  Name : John Doe
+ID : 102  Name : Jane Smith
+ID : 103  Name : Alex
+
+
+---
+
+4️⃣ PUT Request (Update)
+
+URL:
+
+http://localhost:8080/RestAPI/rest/students/update?id=103&name=Alex Brown
+
+Output:
+
+Student 103 Updated to : Alex Brown
+
+
+---
+
+5️⃣ DELETE Request
+
+URL:
+
+http://localhost:8080/RestAPI/rest/students/delete/103
+
+Output:
+
+Student Removed : Alex Brown (ID : 103)
+
+
+---
+
+✅ This is the proper exam writing format:
+
+1. Flow
+
+
+2. Java File
+
+
+3. web.xml
+
+
+4. Output
+
+
+
+
+---
+
+If you want, I can also give you 5–6 viva questions from THIS program (which examiners usually ask) so you don’t get stuck in viva tomorrow.
