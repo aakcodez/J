@@ -1,5 +1,47 @@
 package prgm8;
 
+class Buffer {
+ private int number;
+ private boolean available;
+
+ // Constructor
+ Buffer() {
+     available = false;
+ }
+
+ // Producer method
+ synchronized void put(int value) {
+     while (available) {
+         try {
+             wait();   // wait if buffer is full
+         } catch (InterruptedException e) {
+             System.out.println(e);
+         }
+     }
+     number = value;
+     available = true;
+     System.out.println("Producer put: " + value);
+     notify();   // notify consumer
+ }
+
+ // get() method for Consumer
+ synchronized int get() {
+     while (!available) {
+         try {
+             wait();   // wait if buffer is empty
+         } catch (InterruptedException e) {
+             System.out.println(e);
+         }
+     }
+     available = false;
+     notify();   // notify producer
+     return number;
+ }
+}
+
+
+package prgm8;
+
 //Producer Thread
 class Producer extends Thread {
  Buffer buffer;
